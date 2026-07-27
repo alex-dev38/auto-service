@@ -302,69 +302,64 @@ body.no-scroll {
 
 /* #endregion */
 
-.cards-block {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+/* #region Услуги */
+
+.services {
+  padding: 60px 15px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.services__title {
+  font-family: var(--font-headings);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-headings);
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.services__list {
+  display: flex;
+  flex-direction: column;
   gap: 20px;
-  margin: 0 10px;
 }
 
-h2 {
-  font-family: var(--font-headings);
-  font-weight: 700;
-  color: var(--color-text-headings);
-  font-size: 22px;
-  text-align: center;
-  margin:20px 0;
-  letter-spacing: 0.5px;
-}
-
-.cards-block .card {
+.card {
   background-color: var(--color-bg-card);
-  padding: 15px;
-  border-radius: 4px;
-  transition: background 0.3s ease;
+  border: 1px solid var(--color-border);
+  padding: 30px;
+  border-radius: 3px;
 }
 
-.cards-block .card:hover {
-  background-color: var(--color-bg-card-hover);
-}
-
-.cards-block h3 {
+.card__title {
   font-family: var(--font-headings);
-  font-weight: 700;
   color: var(--color-text-headings);
+  letter-spacing: 1px;
   font-size: 18px;
-  text-align: center;
-  margin-bottom: 10px;
-  letter-spacing: 0.5px;
-}
-
-.cards-block p {
-  font-family: var(--font-body);
-  font-weight: 400;
-  color: var(--color-text-main);
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  line-height: 1.3;
-}
-
-.cards-block p:not(:last-child) {
   margin-bottom: 10px;
 }
 
-.cards-block p span {
+.card__price {
   font-family: var(--font-body);
-  font-weight: 600;
-  color: var(--color-text-headings);
-  font-size: 15px;
+  color: var(--color-text-main);
+  font-size: 16px;
+  margin-bottom: 5px;
   letter-spacing: 0.5px;
 }
 
-.cards-block strong {
-  color: var(--color-text-main);
-}
-
-.cards-block .price {
+.card__price-value {
   color: var(--color-accent);
+  font-weight: 600;
 }
+
+.card__description {
+  font-family: var(--font-body);
+  color: var(--color-text-muted);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+/* #endregion */
