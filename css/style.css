@@ -1,0 +1,370 @@
+/* --- ПОДКЛЮЧЕНИЕ ШРИФТОВ --- */
+@font-face {
+  font-family: 'Oswald';
+  src: url('../assets/fonts/oswald-v57-cyrillic_latin-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Oswald';
+  src: url('../assets/fonts/oswald-v57-cyrillic_latin-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../assets/fonts/inter-v20-cyrillic_latin-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../assets/fonts/inter-v20-cyrillic_latin-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* --- ШРИФТЫ --- */
+  --font-headings: 'Oswald', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* --- ЦВЕТОВАЯ ПАЛИТРА (Суровая мужская / Спецодежда) --- */
+  
+  /* Основной фон сайта (Глубокий графит вместо плоского черного) */
+  --color-bg-main: #121316;
+  
+  /* Фоновые цвета для блоков, карточек и секций (Чуть светлее основного фона) */
+  --color-bg-card: #1c1d22;
+  --color-bg-card-hover: #25272e;
+
+  /* Шапка (Header) и Подвал (Footer) — монолитный темный тон */
+  --color-bg-header-footer: #0b0c0e;
+
+  /* Главный экран (Hero-секция) — для контраста с обычными блоками */
+  --color-bg-hero: #17181c;
+
+  /* --- ТЕКСТ --- */
+  --color-text-main: #f3f4f6;       /* Основной текст: мягкий белый (не режет глаза) */
+  --color-text-muted: #9ca3af;      /* Второстепенный текст / подписи */
+  --color-text-headings: #ffffff;   /* Заголовки: чистый белый */
+  --color-text-dark: #0b0c0e;       /* Темный текст для контрастных оранжевых элементов */
+
+  /* --- СИГНАЛЬНЫЕ АКЦЕНТЫ (Оранжевый / Спецодежда) --- */
+  --color-accent: #ff6b00;          /* Насыщенный сигнальный оранжевый */
+  --color-accent-hover: #e56000;    /* Оранжевый чуть темнее при наведении */
+  --color-accent-alpha: rgba(255, 107, 0, 0.1); /* Прозрачный оранжевый для деликатной подсветки */
+
+  /* --- ГРАНИЦЫ И РАЗДЕЛИТЕЛИ --- */
+  --color-border: #2c2d35;          /* Тонкие строгие рамки для карточек и таблиц */
+}
+
+/* Основные настройки */
+*, *::after, *::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg-main);
+}
+
+body.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* #region Шапка */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-bg-header-footer);
+  padding: 0 15px;
+  height: 60px;
+  position: relative;
+}
+
+.header__logo {
+  text-decoration: none;
+  font-family: var(--font-headings);
+  font-size: 20px;
+  color: var(--color-text-headings);
+  letter-spacing: 1px;
+}
+
+.header__logo-accent {
+  color: var(--color-accent);
+}
+
+.header__contacts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.header__phone {
+  font-family: var(--font-headings);
+  font-size: 16px;
+  color: var(--color-text-headings);
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.header__phone:hover {
+  color: var(--color-accent-hover);
+}
+
+.header__work-time {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.header__hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.header__hamburger--active .header__hamburger-line-top {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.header__hamburger--active .header__hamburger-line-middle {
+  opacity: 0;
+}
+
+.header__hamburger--active .header__hamburger-line-bottom {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+.header__hamburger-line {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-text-headings);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.header__menu {
+  position: absolute;
+  background-color: var(--color-bg-header-footer);
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid var(--color-border);
+  opacity: 0;
+  padding: 25px 0;
+  transition: opacity 0.25s ease, visibility 0.25s;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  visibility: hidden;
+  overscroll-behavior: contain;
+}
+
+.header__menu--active {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.header__menu-link {
+  font-family: var(--font-headings);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-headings);
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.header__menu-link:hover {
+  color: var(--color-accent-hover);
+}
+
+/* #endregion */
+
+/* #region Банер */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 30px;
+  background-color: var(--color-bg-hero);
+  padding: 40px 15px;
+  min-height: calc(100vh - 60px);
+  min-height: calc(100svh - 60px);
+}
+
+.hero__content-top {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hero__supertitle {
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.hero__title {
+  color: var(--color-text-headings);
+  font-family: var(--font-headings);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.hero__list {
+  color: var(--color-text-main);
+  font-family: var(--font-body);
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 260px;
+  gap: 15px;
+  align-items: center;
+  padding: 0;
+}
+
+.hero__list-item {
+  list-style: none;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  padding: 8px 16px;
+  border-radius: 4px;
+  white-space: nowrap;
+  width: 100%;
+  text-align: center;
+}
+
+.hero__button {
+  display: inline-block;
+  font-family: var(--font-headings);
+  font-weight: 700;
+  background-color: var(--color-accent);
+  font-size: 18px;
+  color: var(--color-text-dark);
+  text-decoration: none;
+  letter-spacing: 1px;
+  padding: 18px 15px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.hero__content-bottom {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+}
+
+.hero__button:hover {
+  background-color: var(--color-accent-hover);
+}
+
+.hero__button:active {
+  transform: scale(0.98);
+}
+
+.hero__sub-button {
+  font-family: var(--font-body);
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+/* #endregion */
+
+.cards-block {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin: 0 10px;
+}
+
+h2 {
+  font-family: var(--font-headings);
+  font-weight: 700;
+  color: var(--color-text-headings);
+  font-size: 22px;
+  text-align: center;
+  margin:20px 0;
+  letter-spacing: 0.5px;
+}
+
+.cards-block .card {
+  background-color: var(--color-bg-card);
+  padding: 15px;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.cards-block .card:hover {
+  background-color: var(--color-bg-card-hover);
+}
+
+.cards-block h3 {
+  font-family: var(--font-headings);
+  font-weight: 700;
+  color: var(--color-text-headings);
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.cards-block p {
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--color-text-main);
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+}
+
+.cards-block p:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.cards-block p span {
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--color-text-headings);
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+.cards-block strong {
+  color: var(--color-text-main);
+}
+
+.cards-block .price {
+  color: var(--color-accent);
+}
