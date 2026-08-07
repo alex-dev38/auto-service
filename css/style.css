@@ -81,13 +81,16 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--color-bg-main);
 }
 
 body.no-scroll {
   overflow: hidden;
-  height: 100vh;
 }
 
 /* #region Шапка */
@@ -98,7 +101,9 @@ body.no-scroll {
   background-color: var(--color-bg-header-footer);
   padding: 0 15px;
   height: 60px;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 .header__logo {
@@ -140,6 +145,9 @@ body.no-scroll {
 }
 
 .header__hamburger {
+  background: none;
+  border: none;
+  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -169,6 +177,7 @@ body.no-scroll {
 }
 
 .header__menu {
+  backdrop-filter: blur(10px);
   position: absolute;
   background-color: var(--color-bg-header-footer);
   top: 100%;
@@ -217,23 +226,25 @@ body.no-scroll {
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 30px;
-  background-color: var(--color-bg-hero);
-  padding: 40px 15px;
+  padding: 60px 15px;
   min-height: calc(100vh - 60px);
   min-height: calc(100svh - 60px);
+  background-image: linear-gradient(to bottom,rgba(18, 19, 22, 0.96) 0%, rgba(18, 19, 22, 0.78) 50%, rgba(18, 19, 22, 0.94) 100%), url("../media/photo/hero-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .hero__content-top {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
+  margin-bottom: 64px;
 }
 
 .hero__supertitle {
   color: var(--color-accent);
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 1px;
 }
 
@@ -241,35 +252,37 @@ body.no-scroll {
   color: var(--color-text-headings);
   font-family: var(--font-headings);
   font-weight: 700;
-  font-size: 26px;
+  font-size: 25px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   line-height: 1.5;
 }
 
 .hero__list {
-  color: var(--color-text-main);
-  font-family: var(--font-body);
+  list-style: none;
   font-size: 14px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  max-width: 260px;
-  gap: 15px;
+  max-width: 300px;
+  gap: 16px;
   align-items: center;
   padding: 0;
+  margin-bottom: 64px;
 }
 
 .hero__list-item {
-  list-style: none;
-  background-color: var(--color-bg-card);
+  background-color: transparent;
+  font-family: var(--font-headings);
+  color: var(--color-text-main);
   border: 1px solid var(--color-border);
-  padding: 8px 16px;
-  border-radius: 4px;
-  white-space: nowrap;
+  padding: 10px 16px;
+  border-radius: 8px;
   width: 100%;
   text-align: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .hero__button {
@@ -281,8 +294,8 @@ body.no-scroll {
   color: var(--color-text-dark);
   text-decoration: none;
   letter-spacing: 1px;
-  padding: 18px 15px;
-  border-radius: 4px;
+  padding: 18px 24px;
+  border-radius: 8px;
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
@@ -290,7 +303,7 @@ body.no-scroll {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   max-width: 400px;
 }
 
@@ -305,69 +318,7 @@ body.no-scroll {
 .hero__sub-button {
   font-family: var(--font-body);
   color: var(--color-text-muted);
-  font-size: 13px;
-}
-
-/* #endregion */
-
-/* #region Услуги */
-
-.services {
-  padding: 60px 15px;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.services__title {
-  font-family: var(--font-headings);
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--color-text-headings);
-  letter-spacing: 1px;
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.services__list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.card {
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  padding: 30px;
-  border-radius: 3px;
-}
-
-.card__title {
-  font-family: var(--font-headings);
-  color: var(--color-text-headings);
-  letter-spacing: 1px;
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.card__price {
-  font-family: var(--font-body);
-  color: var(--color-text-main);
-  font-size: 16px;
-  margin-bottom: 5px;
-}
-
-.card__price-value {
-  font-family: var(--font-headings);
-  color: var(--color-accent);
-  font-weight: 700;
-}
-
-.card__description {
-  font-family: var(--font-body);
-  color: var(--color-text-muted);
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.5;
+  font-size: 12px;
 }
 
 /* #endregion */
@@ -375,7 +326,7 @@ body.no-scroll {
 /* #region О нас */
 
 .about {
-  padding: 60px 15px 0 15px;
+  padding: 60px 15px;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -409,13 +360,13 @@ body.no-scroll {
 }
 
 .about__list {
+  list-style: none;
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
 .about__list-item {
-  list-style: none;
   color: var(--color-text-main);
   font-size: 16px;
   padding: 0 0 0 15px;
@@ -429,3 +380,74 @@ body.no-scroll {
 }
 
 /* #endregion */
+
+/* #region Услуги */
+
+.services {
+  padding: 60px 15px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.services__title {
+  font-family: var(--font-headings);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-headings);
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.services__list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  padding: 24px;
+  border-radius: 3px;
+  transition: background 0.3s ease, border 0.3s ease;
+}
+
+.card__title {
+  font-family: var(--font-headings);
+  color: var(--color-text-headings);
+  letter-spacing: 1px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card__price {
+  font-family: var(--font-body);
+  color: var(--color-text-muted);
+  font-size: 16px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 5px;
+}
+
+.card__price-value {
+  font-family: var(--font-headings);
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.card__description {
+  font-family: var(--font-body);
+  color: var(--color-text-main);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.card:hover {
+  background-color: var(--color-bg-card-hover);
+  border-color: var(--color-accent-hover);
+}
+
+/* #endregion */
+
