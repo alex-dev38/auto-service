@@ -260,7 +260,6 @@ body.no-scroll {
 
 .hero__list {
   list-style: none;
-  font-size: 14px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -279,9 +278,10 @@ body.no-scroll {
   border: 1px solid var(--color-border);
   padding: 10px 16px;
   border-radius: 8px;
+  font-size: 12px;
   width: 100%;
   text-align: center;
-  letter-spacing: 0.5px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
 }
 
